@@ -188,12 +188,30 @@
             letter-spacing: 0.02em;
             margin-bottom: 0.3em;
         }
+        .translate-container {
+            width: 100%;
+            max-width: 500px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="translate-container">
+        <h1>NOTE</h1>
+        <p>WE MADE A DETAILED DEMO VIDEO WITH THIS FEATURE.AS WE DONT HAVE CLOUD STORAGE WE CANT HOST THIS FUNCTIONALITY</p>
+    </div>
     <div class="wrapper">
         <h1>Upload and Translate Video</h1>
-        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+        <form id="uploadForm" action=""  enctype="multipart/form-data">
             <div class="upload drop-area">
                 <div class="upload-info">
                     <span class="upload-filename inactive drop-text">No file selected</span>
