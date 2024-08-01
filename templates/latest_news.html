@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest News</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <style>
+        body {
+            background-color: grey;
+            background-repeat: no-repeat;
+            background-size: cover;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: #ffffff;
+        }
+
+        .citys {
+            padding: 40px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+
+        .citys h1 {
+            font-size: 2.5em;
+            letter-spacing: 2px;
+            margin: 0;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .custom-nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .custom-nav button {
+            background: #2196f3;
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .custom-nav button:hover {
+            background: #1e88e5;
+            transform: scale(1.05);
+        }
+
+        .owl-carousel .post-slide {
+            background: rgba(255, 255, 255, 0.8);
+            margin: 20px;
+            border-radius: 15px;
+            box-shadow: 0 14px 22px -9px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .owl-carousel .post-slide:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .post-img {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            margin: -12px 15px 8px;
+        }
+
+        .post-img img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .post-slide:hover .post-img img {
+            transform: scale(1.1);
+        }
+
+        .post-content {
+            padding: 15px;
+        }
+
+        .post-title a {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            display: block;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .post-title a:hover {
+            color: #2196f3;
+            text-decoration: none;
+        }
+
+        .post-description {
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .post-date {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .post-date i {
+            font-size: 16px;
+            margin-right: 8px;
+            color: #999;
+        }
+
+        .read-more {
+            display: inline-block;
+            padding: 7px 15px;
+            background: #2196f3;
+            color: #ffffff;
+            border-radius: 25px;
+            text-transform: uppercase;
+            font-size: 12px;
+            transition: background 0.3s ease, color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .read-more:hover {
+            background: #1e88e5;
+            color: #ffffff;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media only screen and (max-width: 1280px) {
+            .post-slide .post-content {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="citys">
+        <h1>{{ news_data[0].cont }}</h1>
+    </div>
+    
+    <div class="custom-nav">
+        <button id="prevBtn"><p>PREV</p></button>
+        <button id="nextBtn"><p>NEXT</p></button>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="news-slider-1" class="owl-carousel">
+                    {% for news in news_data %}
+                    <div class="post-slide">
+                        <div class="post-img">
+                            <img src="{{ news.img_src }}" alt="News Image">
+                            <a href="{{ news.link }}" class="over-layer"><i class="fa fa-link"></i></a>
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">
+                                <a href="{{ news.link }}">{{ news.title }}</a>
+                            </h3>
+                            <p class="post-description">{{ news.content }}...</p>
+                            <span class="post-date"><i class="fa fa-clock-o"></i>{{ news.date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="citys">
+        <h1>{{ global_news[0].cont }}</h1>
+    </div>
+    
+    <div class="custom-nav">
+        <button id="prevBtnGlobal"><p>PREV</p></button>
+        <button id="nextBtnGlobal"><p>NEXT</p></button>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div id="news-slider-2" class="owl-carousel">
+                    {% for news in global_news %}
+                    <div class="post-slide">
+                        <div class="post-img">
+                            <img src="{{ news.img_src }}" alt="News Image">
+                            <a href="{{ news.link }}" class="over-layer"><i class="fa fa-link"></i></a>
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title">
+                                <a href="{{ news.link }}">{{ news.title }}</a>
+                            </h3>
+                            <p class="post-description">{{ news.content }}...</p>
+                            <span class="post-date"><i class="fa fa-clock-o"></i>{{ news.date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            var owl1 = $("#news-slider-1").owlCarousel({
+                items: 3,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [980, 2],
+                itemsMobile: [600, 1],
+                navigation: false,
+                pagination: true,
+                autoPlay: false,
+            });
+
+            $("#prevBtn").click(function () {
+                owl1.trigger('owl.prev');
+            });
+
+            $("#nextBtn").click(function () {
+                owl1.trigger('owl.next');
+            });
+
+            var owl2 = $("#news-slider-2").owlCarousel({
+                items: 3,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [980, 2],
+                itemsMobile: [600, 1],
+                navigation: false,
+                pagination: true,
+                autoPlay: false,
+            });
+
+            $("#prevBtnGlobal").click(function () {
+                owl2.trigger('owl.prev');
+            });
+
+            $("#nextBtnGlobal").click(function () {
+                owl2.trigger('owl.next');
+            });
+        });
+
+        function translatePage() {
+            var lang = document.getElementById('language-selector').value;
+            if (lang) {
+                var googleTranslateElement = document.createElement('div');
+                googleTranslateElement.id = 'google_translate_element';
+                document.body.appendChild(googleTranslateElement);
+
+                var script = document.createElement('script');
+                script.src = `https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit`;
+                document.head.appendChild(script);
+
+                window.googleTranslateElementInit = function() {
+                    new google.translate.TranslateElement({
+                        pageLanguage: 'en',
+                        includedLanguages: lang,
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                    }, 'google_translate_element');
+                };
+            } else {
+                alert('Please select a language.');
+            }
+        }
+    </script>
+</body>
+</html>

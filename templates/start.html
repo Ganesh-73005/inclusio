@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locality Page</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: #ff9800;
+            animation: fadeIn 2s ease-out;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #b0bec5;
+            margin-bottom: 30px;
+            animation: fadeIn 2s ease-out 0.5s;
+        }
+
+        .translate-container {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        select {
+            background-color: #1e1e1e;
+            border: 2px solid #333;
+            border-radius: 10px;
+            color: #ffffff;
+            font-size: 1em;
+            padding: 10px;
+            margin-top: 20px;
+            width: 100%;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        select:hover, select:focus {
+            background-color: #333;
+            border-color: #ff9800;
+            outline: none;
+        }
+
+        .blue-btn {
+            display: inline-block;
+            height: 60px;
+            width: 200px;
+            background-color: #3b5998;
+            border-radius: 25px;
+            margin: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-transform: uppercase;
+        }
+
+        .blue-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 300%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3));
+            transition: 0.6s;
+            z-index: 0;
+            transform: skewX(-30deg);
+        }
+
+        .blue-btn:hover::before {
+            left: 100%;
+        }
+
+        .blue-btn a {
+            color: white;
+            text-decoration: none;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+
+        .blue-btn:hover a {
+            color: #ff9800;
+        }
+
+        .blue-btn:first-of-type {
+            background-color: #3b5998;
+        }
+
+        .blue-btn:first-of-type:hover {
+            background-color: #003D60;
+        }
+
+        .blue-btn:last-of-type {
+            background-color: #4CAF50;
+        }
+
+        .blue-btn:last-of-type:hover {
+            background-color: #388E3C;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="translate-container">
+        <h1>Welcome to Our Website</h1>
+        <p>Choose your language</p>
+    </div>
+
+    <form id="locality-form" method="POST" action="/news">
+        <input type="hidden" id="locality" name="locality" value="">
+        
+        <div class="translate-container">
+            <select id="language-selector" name="language">
+                <option value="">Select Language</option>
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="zh">Chinese</option>
+                <option value="hi">Hindi</option>
+                <option value="ta">Tamil</option>
+                <option value="te">Telugu</option>
+                <option value="ar">Arabic</option>
+                <option value="ru">Russian</option>
+                <option value="pt">Portuguese</option>
+                <option value="ja">Japanese</option>
+                <!-- Add more languages as needed -->
+            </select>
+        </div>
+        <br>
+        <br>
+        <div class="blue-btn">
+            <a class="first-link" href="#" id="send-locality">
+                Get Started
+            </a>
+        </div>
+        <div class="blue-btn">
+            <a href="/video" id="none">
+                Video Translator
+            </a>
+        </div>
+    </form>
+
+
+    <script>
+        async function initMap() {
+            const { Map, Geolocation } = await google.maps.importLibrary("maps", "geolocation");
+            const { PlacesService } = await google.maps.importLibrary("places");
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(position => {
+                    const { latitude, longitude } = position.coords;
+                    getAddressComponents(latitude, longitude);
+                });
+            }
+        }
+
+        function getAddressComponents(lat, lng) {
+            const geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyDP8Sy2pOrdMBp_7kvkgXHA-ZeIP_30gQQ`;
+
+            fetch(geocodeUrl)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'OK') {
+                        const addressComponents = data.results[0].address_components;
+                        let locality = '';
+
+                        addressComponents.forEach(component => {
+                            if (component.types.includes('locality')) {
+                                locality = component.long_name;
+                            }
+                        });
+
+                        if (locality) {
+                            locality = locality.toLowerCase();
+                            document.getElementById('locality').value = locality;
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching address components:', error));
+        }
+
+        document.getElementById('send-locality').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('locality-form').submit();
+        });
+    </script>
+
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDP8Sy2pOrdMBp_7kvkgXHA-ZeIP_30gQQ&loading=async&callback=initMap"></script>
+</body>
+</html>

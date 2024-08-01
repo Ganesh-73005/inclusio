@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translated Audio</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #2d353c;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+
+        audio {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 500px;
+            margin: 20px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 1.2em;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            padding: 10px 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a:hover {
+            background-color: #007bff;
+            color: #ffffff;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            audio {
+                max-width: 100%;
+            }
+
+            a {
+                font-size: 1em;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Translated Audio</h1>
+    <audio controls style="border-radius: 30px;">
+        <source src="{{ audio_file }}" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    <br>
+    <a href="/video">Go back</a>
+</body>
+</html>
