@@ -3,7 +3,7 @@ HACK4CHANGE
 Team name: Code4good
 Team leader: Dharani Raj
 Problem Statement: Inclusion
-
+"NOTE: CURRENTLY WE MADE THIS PROTOTYPE FOR TAMIL NADU LOCALITIES ONLY IF YOU ACCESSING THIS FROM ANY OTHER STATES YOU CANT VIEW LOCAL NEWS"
 PROTOTYPE BRIEF:
 
 •	Our prototype acts as an efficient solution to the significant challenges faced by marginalized communities due to language and literacy barriers. We have developed a comprehensive platform, accessible via a website, designed to deliver personalized information and news in users' native languages.
