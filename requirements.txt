@@ -7,7 +7,6 @@ gTTS==2.5.2
 moviepy==1.0.3
 pydub==0.25.1
 SpeechRecognition==3.10.4
-
 gunicorn==22.0.0
 requests==2.32.3
 beautifulsoup4==4.12.3
