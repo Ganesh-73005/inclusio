@@ -143,6 +143,19 @@ def news():
     locality = request.form.get('locality')
     lang = request.form.get('language')
     print(locality, lang)
+    tamil_nadu_localities = [
+    'chennai', 'coimbatore', 'cuddalore', 'dharmapuri', 'dindigul',
+    'erode', 'kallakurichi', 'kancheepuram', 'kanniyakumari', 'karur',
+    'krishnagiri', 'madurai', 'nagapattinam', 'namakkal', 'nilgiris',
+    'perambalur', 'pudukkottai', 'ramanathapuram', 'salem', 'sivaganga',
+    'tenkasi', 'thanjavur', 'theni', 'thoothukudi', 'tiruchirappalli',
+    'tirunelveli', 'tirupathur', 'tiruppur', 'tiruvallur', 'tiruvannamalai',
+    'vellore', 'viluppuram', 'virudhunagar'
+]
+    if locality not in tamil_nadu_loaclities:
+        global_news_data = fetch_bbc_news(lang)
+        local_news_data = "None"
+        return render_template('latest_news.html', news_data=local_news_data,global_news =global_news_data)
     if not locality:
         return "Please provide a locality.", 400
 
