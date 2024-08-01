@@ -5,8 +5,7 @@ from google.cloud import translate_v2 as translate
 import os
 import moviepy.editor as mp
 import speech_recognition as sr
-import whisper
-import subprocess
+
 
 
 from gtts import gTTS
