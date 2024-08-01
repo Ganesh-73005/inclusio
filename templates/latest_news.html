@@ -154,6 +154,7 @@
     </style>
 </head>
 <body>
+    {% if news_data != "None" %}
     <div class="citys">
         <h1>{{ news_data[0].cont }}</h1>
     </div>
@@ -186,7 +187,12 @@
             </div>
         </div>
     </div>
-    
+{% else %}
+    <div class="alert alert-warning">
+        <h2>We are not serving this area</h2>
+    </div>
+{% endif %}
+
     <div class="citys">
         <h1>{{ global_news[0].cont }}</h1>
     </div>
