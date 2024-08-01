@@ -152,7 +152,7 @@ def news():
     'tirunelveli', 'tirupathur', 'tiruppur', 'tiruvallur', 'tiruvannamalai',
     'vellore', 'viluppuram', 'virudhunagar'
 ]
-    if locality not in tamil_nadu_loaclities:
+    if locality not in tamil_nadu_localities:
         global_news_data = fetch_bbc_news(lang)
         local_news_data = "None"
         return render_template('latest_news.html', news_data=local_news_data,global_news =global_news_data)
