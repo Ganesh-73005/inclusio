@@ -175,12 +175,12 @@ def upload():
     target_language = request.form['language']
     
     # Save the uploaded video
-    video_path = f"/static/uploads/{video_file.filename}"
+    video_path = f"static/uploads/{video_file.filename}"
     video_file.save(video_path)
 
     # Extract audio from video
     video_clip = mp.VideoFileClip(video_path)
-    audio_path = "/static/uploads/temp_audio.wav"
+    audio_path = "static/uploads/temp_audio.wav"
     video_clip.audio.write_audiofile(audio_path)
 
     # Recognize speech and auto-detect language
@@ -203,7 +203,7 @@ def upload():
     
     # Convert translated text to speech
     tts = gTTS(translated_text, lang=target_language)
-    translated_audio_path = f"/static/uploads/translated_audio.mp3"
+    translated_audio_path = f"static/uploads/translated_audio.mp3"
     tts.save(translated_audio_path)
 
     # Return the HTML page with an audio player for the translated audio
